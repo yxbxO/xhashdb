@@ -39,10 +39,10 @@ FILE_FOR = {
     "id": "iw/gsc_identifiers.csv",
     "omnvar_salted": "iw/omnvars.csv",
     "omnvar": "iw/omnvars.csv",
-    "fnv": "iw/strings.csv",
-    "fnv_lower": "iw/strings.csv",
-    "fnv~63": "iw/strings.csv",
-    "fnv_lower~63": "iw/strings.csv",
+    "fnv": None,                         # fnv names say what they are, see fnv_file()
+    "fnv_lower": None,
+    "fnv~63": None,
+    "fnv_lower~63": None,
 }
 
 
@@ -70,6 +70,18 @@ def functions_for(path):
     if path.name not in FILES:
         raise SystemExit("unknown file %s; known: %s" % (path.name, ", ".join(sorted(FILES))))
     return FILES[path.name]
+
+
+def fnv_file(name, fams=()):
+    """Where an fnv row goes, by name shape; the counterpart of asset_file().
+
+    bones.csv needs plain fnv and is all-lowercase. soundbanks_aliases.csv is left
+    unrouted because its prefixes also occur on ordinary identifiers.
+    """
+    if ("fnv" in fams and name == name.lower()
+            and (name.startswith(("j_", "tag_")) or name.endswith("_mesh"))):
+        return "iw/bones.csv"
+    return "iw/strings.csv"
 
 
 def asset_file(name):
@@ -123,7 +135,9 @@ def run_add(lines):
             dup.append((h, name))
         else:
             seen.add(h)
-            target = asset_file(name) if fam == "asset" else FILE_FOR[fam]
+            target = (asset_file(name) if fam == "asset"
+                      else fnv_file(name, fams) if fam.startswith("fnv")
+                      else FILE_FOR[fam])
             append(target, h, name)
             filed.append((h, name, target))
 

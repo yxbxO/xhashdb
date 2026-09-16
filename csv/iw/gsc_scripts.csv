@@ -4397,3 +4397,11 @@ hash,name
 6A1B268260F5489A,scripts/mp/common/equipment/support_box.gsc
 731D5900EB69583D,scripts/mp/frontendutils.gsc
 776A53F0BFEA18CF,scripts/mp/common/equipment/bottle.gsc
+372042BA4C85A452,scripts/common/scripted_widgets.gsc
+3F8889C16399185C,scripts/common/progression_utility.gsc
+4170B1140B0A0323,scripts/common/max_heap.gsc
+4A6760982B403BAD,scripts/common/telemetry_utils.gsc
+5032ED8DA1128621,scripts/common/scriptable_group.gsc
+54F6D121E91434F8,scripts/common/conditional_container.gsc
+697B7AE06BA9B28C,scripts/mp/leagueplay_br.gsc
+7C393D30D73CE315,scripts/common/callback_sequence.gsc
